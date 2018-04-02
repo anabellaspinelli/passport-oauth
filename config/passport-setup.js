@@ -12,17 +12,24 @@ passport.use(
       clientSecret: keys.google.clientSecret
     },
     (accessToken, refreshToken, profile, done) => {
-      // passport callback function fires after exchanging code for profile info
-      console.log('passport callback function fired');
-      console.log(profile);
-      new User({
-        username: profile.displayName,
-        googleId: profile.id
-      })
-        .save()
-        .then(newUser => {
-          console.log(`new user created: ${newUser}`);
-        });
+      // passport callback function fires AFTER exchanging code for profile info
+      // check if user already exists in the DB
+      User.findOne({ googleId: profile.id }).then(currentUser => {
+        if (currentUser) {
+          //already have the user
+          console.log(`user is ${currentUser}`);
+        } else {
+          // create new user in our DB
+          new User({
+            username: profile.displayName,
+            googleId: profile.id
+          })
+            .save()
+            .then(newUser => {
+              console.log(`new user created: ${newUser}`);
+            });
+        }
+      });
     }
   )
 );
