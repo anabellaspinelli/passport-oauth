@@ -1,9 +1,15 @@
 const router = require('express').Router();
 const passport = require('passport');
+const fs = require('fs');
+const path = require('path');
+
+const scopes = JSON.parse(
+  fs.readFileSync(path.resolve('./config/scopes.json'))
+);
 
 // login page
 router.get('/login', (req, res) => {
-  res.render('login', { user: req.user });
+  res.render('login', { user: req.user, scopes });
 });
 
 // logout
@@ -12,13 +18,12 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-//auth with google
-router.get(
-  '/typeform',
+//auth with typeform
+router.get('/typeform', (req, res) => {
   passport.authenticate('oauth2', {
-    scope: ['forms:read']
-  })
-);
+    scope: Object.keys(req.query).filter(scope => req.query[scope] == 'on')
+  })(req, res);
+});
 
 // callback route for google to redirect to
 router.get(

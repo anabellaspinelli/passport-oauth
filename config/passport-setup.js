@@ -20,7 +20,6 @@ passport.use(
     (accessToken, refreshToken, profile, cb) => {
       // passport callback function fires AFTER exchanging code for profile info
       // check if user already exists in the DB
-      console.log('passport callback profile ', profile);
       cb(null, { access_token: accessToken });
     }
   )

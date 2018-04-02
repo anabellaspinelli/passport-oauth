@@ -40,7 +40,7 @@
     header {
       max-width: 960px;
       margin: 30px auto;
-      padding: 0 10px;
+      padding: 0 30px;
       color: #333;
     }
 
@@ -50,6 +50,13 @@
       font-size: 18px;
       padding: 10px;
       background: #ff5353;
+      margin: 10px 0;
+      display: inline-block;
+      border: none
+    }
+
+    form>div {
+      margin-bottom: 30px;
     }
   </style>
 </head>
@@ -63,10 +70,24 @@
     </ul>
   </nav>
   <header>
-    <h1>Log in using:</h1>
+    <h1>Select the scopes and log in:</h1>
   </header>
   <main>
-    <a href="/auth/typeform" class="typeform-btn">Typeform</a>
+    <form action="/auth/typeform" method="get">
+      <% scopes.forEach(function(scope) { %>
+        <div>
+          <h2>
+            <%= scope %>
+          </h2>
+          <input type="checkbox" name="<%= scope %>:read"></input>
+          <label for="<%= scope %>:read">read</label>
+
+          <input type="checkbox" name="<%= scope %>:write"></input>
+          <label for="<%= scope %>:write">write</label>
+        </div>
+        <% }); %>
+          <button class="typeform-btn">Login with Typeform</a>
+    </form>
   </main>
 </body>
 
