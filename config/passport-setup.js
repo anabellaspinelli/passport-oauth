@@ -1,54 +1,27 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
+const OAuth2Strategy = require('passport-oauth2');
 const keys = require('./keys');
 const User = require('../models/user-model');
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id).then(user => {
-    done(null, user);
-  });
-});
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));
 
 passport.use(
-  new GoogleStrategy(
+  new OAuth2Strategy(
     {
-      //options for the google strategy
-      callbackURL: '/auth/google/redirect',
-      clientID: keys.google.clientID,
-      clientSecret: keys.google.clientSecret
+      //options for the typeform strategy
+      authorizationURL: 'https://api.typeform.com/oauth/authorize',
+      tokenURL: 'https://api.typeform.com/oauth/token',
+      clientID: keys.typeform.clientID,
+      clientSecret: keys.typeform.clientSecret,
+      callbackURL: '/auth/typeform/redirect'
     },
-    (accessToken, refreshToken, profile, done) => {
+    (accessToken, refreshToken, profile, cb) => {
       // passport callback function fires AFTER exchanging code for profile info
       // check if user already exists in the DB
-      console.log(profile._json.image.url);
-      User.findOne({ googleId: profile.id })
-        .then(currentUser => {
-          if (currentUser) {
-            //already have the user
-            done(null, currentUser);
-          } else {
-            // create new user in our DB
-            new User({
-              username: profile.displayName,
-              googleId: profile.id,
-              thumbnail: profile._json.image.url
-            })
-              .save()
-              .then(newUser => {
-                done(null, newUser);
-              })
-              .catch(e => {
-                console.log('gordo aventura', e);
-              });
-          }
-        })
-        .catch(e => {
-          console.log('patito feo', e);
-        });
+      console.log('passport callback profile ', profile);
+      cb(null, { access_token: accessToken });
     }
   )
 );

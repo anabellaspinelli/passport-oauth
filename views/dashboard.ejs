@@ -43,6 +43,11 @@
       padding: 0 10px;
       color: #333;
     }
+
+    .token {
+      color: #ff5353;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -58,22 +63,17 @@
             <a href="/auth/login">Login</a>
           </li>
           <% } %>
-            <li>
-              <a href="/">Homepage</a>
-            </li>
-            <li>
-              <a href="/profile">Profile</a>
-            </li>
     </ul>
   </nav>
   <header>
-    <h1>Welcome to your profile,
-      <%= user.username %>
+    <h1>You are now logged in with Typeform
     </h1>
   </header>
   <main>
-    <p>This is your profile thumbnail:</p>
-    <img src="<%= user.thumbnail %>" alt="thumbnail">
+    <p>This is your access token:</p>
+    <p class="token">
+      <%= user.access_token %>
+    </p>
   </main>
 </body>
 

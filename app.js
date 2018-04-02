@@ -1,6 +1,6 @@
 const express = require('express');
 const authRoutes = require('./routes/auth-routes');
-const profileRoutes = require('./routes/profile-routes');
+const dashboardRoutes = require('./routes/dashboard-routes');
 const passportSetup = require('./config/passport-setup');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
@@ -28,7 +28,7 @@ mongoose.connect(keys.mongodb.dbURI, () => {
 });
 
 app.use('/auth', authRoutes);
-app.use('/profile', profileRoutes);
+app.use('/dashboard', dashboardRoutes);
 
 app.get('/', (req, res) => {
   res.render('home', { user: req.user });

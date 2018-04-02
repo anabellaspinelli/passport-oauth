@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -44,7 +44,7 @@
       color: #333;
     }
 
-    .google-btn {
+    .typeform-btn {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
@@ -57,28 +57,16 @@
 <body>
   <nav>
     <ul>
-      <% if (user) { %>
-        <li>
-          <a href="/auth/logout">Log out</a>
-        </li>
-        <%} else { %>
-          <li>
-            <a href="/auth/login">Login</a>
-          </li>
-          <% } %>
-            <li>
-              <a href="/">Homepage</a>
-            </li>
-            <li>
-              <a href="/profile">Profile</a>
-            </li>
+      <li>
+        <a href="/">Home</a>
+      </li>
     </ul>
   </nav>
   <header>
-    <h1>Login using...</h1>
+    <h1>Log in using:</h1>
   </header>
   <main>
-    <a href="/auth/google" class="google-btn">Google+</a>
+    <a href="/auth/typeform" class="typeform-btn">Typeform</a>
   </main>
 </body>
 

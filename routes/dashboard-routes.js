@@ -9,7 +9,7 @@ const authCheck = (req, res, next) => {
 };
 
 router.use('/', authCheck, (req, res) => {
-  res.render('profile', {
+  res.render('dashboard', {
     user: req.user
   });
 });
