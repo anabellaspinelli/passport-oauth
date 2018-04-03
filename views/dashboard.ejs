@@ -39,14 +39,51 @@
     main,
     header {
       max-width: 960px;
-      margin: 30px auto;
       padding: 0 10px;
       color: #333;
+      margin: auto;
     }
 
     .token {
       color: #ff5353;
       font-weight: bold;
+      font-family: monospace;
+      font-size: 18px;
+    }
+
+    .buttons {
+      margin: 0 10px;
+      display: inline-block;
+    }
+
+    button {
+      border-radius: 3px;
+      padding: 5px;
+      margin: 3px 0px;
+      color: #fff;
+      font-size: 15px;
+      background: #ff7575;
+      text-decoration: none;
+      padding: 5px;
+      border: none;
+      min-width: 150px;
+    }
+
+    button:hover {
+      background: #ff8686;
+      cursor: pointer;
+    }
+
+    .selected-scope {
+      border: 2px solid #9be3d4;
+      margin: 0 2px;
+      padding: 5px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .info {
+      padding-bottom: 30px;
     }
   </style>
 </head>
@@ -70,10 +107,41 @@
     </h1>
   </header>
   <main>
-    <p>This is your access token:</p>
-    <p class="token">
-      <%= user.access_token %>
-    </p>
+    <section class="info">
+      <p>This is your access token:</p>
+      <p class="token">
+        <%= user.access_token %>
+      </p>
+      <p>Your selected scopes in this session are:</p>
+
+      <%if (typeof selectedScopes !== 'string') { %>
+        <% selectedScopes.forEach(function(scope) { %>
+          <span class="selected-scope">
+            <%= scope %>
+          </span>
+          <% }); %>
+            <% } else {%>
+              <span class="selected-scope">
+                <%= selectedScopes %>
+              </span>
+              <% } %>
+
+
+    </section>
+    <h2>Now try them out!</h2>
+    <% typeformScopes.forEach(function(scope) { %>
+      <section class="buttons">
+        <form action="/typeform/<%= scope %>" method="get">
+          <button>Get
+            <%= scope %>!</button>
+        </form>
+        <form action="/typeform/<%= scope %>" method="post">
+          <button>Post
+            <%= scope.substring(scope.length - 1, 0) %>!</button>
+        </form>
+      </section>
+      <% }); %>
+
   </main>
 </body>
 

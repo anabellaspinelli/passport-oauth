@@ -1,11 +1,13 @@
 const express = require('express');
-const authRoutes = require('./routes/auth-routes');
-const dashboardRoutes = require('./routes/dashboard-routes');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
+
 const passportSetup = require('./config/passport-setup');
 const keys = require('./config/keys');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
-const path = require('path');
+
+const authRoutes = require('./routes/auth-routes');
+const dashboardRoutes = require('./routes/dashboard-routes');
+const typeformRoutes = require('./routes/typeform-api-routes');
 
 const app = express();
 
@@ -24,6 +26,7 @@ app.use(passport.session());
 
 app.use('/auth', authRoutes);
 app.use('/dashboard', dashboardRoutes);
+app.use('/typeform', typeformRoutes);
 
 app.get('/', (req, res) => {
   res.render('home', { user: req.user });

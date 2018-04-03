@@ -1,15 +1,13 @@
 const router = require('express').Router();
 const passport = require('passport');
-const fs = require('fs');
-const path = require('path');
+const scopes = require('../config/scopes');
+const querystring = require('querystring');
 
-const scopes = JSON.parse(
-  fs.readFileSync(path.resolve('./config/scopes.json'))
-);
+let selectedScopes;
 
 // login page
 router.get('/login', (req, res) => {
-  res.render('login', { user: req.user, scopes });
+  res.render('login', { scopes });
 });
 
 // logout
@@ -20,8 +18,12 @@ router.get('/logout', (req, res) => {
 
 //auth with typeform
 router.get('/typeform', (req, res) => {
+  selectedScopes = Object.keys(req.query).filter(
+    scope => req.query[scope] == 'on'
+  );
+
   passport.authenticate('oauth2', {
-    scope: Object.keys(req.query).filter(scope => req.query[scope] == 'on')
+    scope: selectedScopes
   })(req, res);
 });
 
@@ -32,8 +34,8 @@ router.get(
   (req, res) => {
     // this fires AFTER the passport callback function
     // the user obj comes in the request as per passport.serialize/deserialize
-
-    res.redirect('/dashboard');
+    const query = querystring.stringify({ selectedScopes: selectedScopes });
+    res.redirect('/dashboard?' + query);
   }
 );
 
