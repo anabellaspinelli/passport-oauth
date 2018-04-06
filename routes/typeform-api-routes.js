@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const request = require('superagent');
+const scopes = require('../config/scopes');
+
 const TF_API_BASE = 'https://api.typeform.com';
 
-router.get('/forms', (req, res) => {
-  return (
+scopes.forEach(scope => {
+  router.get(`/${scope}`, (req, res) => {
     request
-      .get(`${TF_API_BASE}/forms`)
+      .get(`${TF_API_BASE}/${scope}`)
       .set({ Authorization: `Bearer ${req.user.access_token}` })
       .then(response => {
         res.send({
@@ -14,21 +16,8 @@ router.get('/forms', (req, res) => {
         });
       })
       // eslint-disable-next-line no-console
-      .catch(e => console.error(e))
-  );
-});
-
-router.get('/images', (req, res) => {
-  return (
-    request
-      .get(`${TF_API_BASE}/images`)
-      .set({ Authorization: `Bearer ${req.user.access_token}` })
-      .then(response => {
-        res.send(response.body);
-      })
-      // eslint-disable-next-line no-console
-      .catch(e => console.error(e))
-  );
+      .catch(e => console.error(e));
+  });
 });
 
 module.exports = router;
