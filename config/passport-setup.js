@@ -16,8 +16,7 @@ passport.use(
       callbackURL: '/auth/typeform/redirect'
     },
     (accessToken, refreshToken, profile, cb) => {
-      // passport callback function fires AFTER exchanging code for profile info
-      // check if user already exists in the DB
+      // passport callback function fires after exchanging code for profile info
       cb(null, { access_token: accessToken });
     }
   )

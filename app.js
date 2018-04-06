@@ -3,6 +3,8 @@ const path = require('path');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 
+// eslint-disable-next-line no-unused-vars
+const passportSetup = require('./config/passport-setup');
 const keys = require('./config/keys');
 
 const authRoutes = require('./routes/auth-routes');

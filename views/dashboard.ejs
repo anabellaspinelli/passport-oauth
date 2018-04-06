@@ -82,6 +82,14 @@
       display: inline-block;
     }
 
+    #status {
+      border: 2px solid #9be3d4;
+      margin: 0 2px;
+      padding: 5px;
+      border-radius: 3px;
+      display: none;
+    }
+
     #response {
       font-family: monospace;
       font-weight: bold;
@@ -89,6 +97,7 @@
       padding: 10px;
       min-height: 100px;
       border-radius: 3px;
+      display: none;
     }
 
     pre {
@@ -148,9 +157,8 @@
     </section>
 
     <pre>
-      <code>
-        <section id="response">
-        </section>
+      <h3 id="status"></h3>
+      <code id="response">
       </code>
     </pre>
 
