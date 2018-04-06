@@ -1,8 +1,8 @@
 const express = require('express');
+const path = require('path');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 
-const passportSetup = require('./config/passport-setup');
 const keys = require('./config/keys');
 
 const authRoutes = require('./routes/auth-routes');
@@ -24,6 +24,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/auth', authRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/typeform', typeformRoutes);
@@ -33,5 +35,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(3000, () => {
+  // eslint-disable-next-line no-console
   console.log('app listening on port 3000');
 });
