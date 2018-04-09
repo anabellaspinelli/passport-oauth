@@ -17,11 +17,10 @@ window.onload = () => {
           .then(body => {
             let responseBlock = document.getElementById('response');
 
-            responseBlock.style.display = 'block';
             responseBlock.textContent = JSON.stringify(
               body.typeformResponseBody,
               null,
-              4
+              2
             );
           })
           // eslint-disable-next-line no-console

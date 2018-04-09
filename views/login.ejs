@@ -39,12 +39,20 @@
     main,
     header {
       max-width: 960px;
-      margin: 30px auto;
+      margin: 30px auto 0;
       padding: 0 30px;
       color: #333;
     }
 
-    .typeform-btn {
+    main {
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 5px auto;
+    }
+
+    .btn {
       color: #fff;
       text-decoration: none;
       font-size: 18px;
@@ -55,8 +63,14 @@
       border: none
     }
 
+    .group-scopes {
+      background: #55d3ba;
+      font-size: 15px;
+      padding: 7px;
+    }
+
     form>div {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -73,6 +87,9 @@
     <h1>Select the scopes and log in:</h1>
   </header>
   <main>
+    <button id="all" class="btn group-scopes">All the scopes!</button>
+    <button id="read" class="btn group-scopes">Read everything</button>
+    <button id="write" class="btn group-scopes">Write everything</button>
     <form action="/auth/typeform" method="get">
       <% scopes.forEach(function(scope) { %>
         <div>
@@ -86,9 +103,10 @@
           <label for="<%= scope %>:write">write</label>
         </div>
         <% }); %>
-          <button class="typeform-btn" type="submit">Login with Typeform</a>
+          <button class="btn" type="submit">Login with Typeform</a>
     </form>
   </main>
 </body>
+<script type="application/javascript" src="/js/login.js"></script>
 
 </html>
