@@ -6,12 +6,18 @@
   <title>Typeform: Test OAuth Scopes</title>
   <style>
     body {
-      font-family: arial;
+      --accent: #d8495a;
+
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       margin: 0;
+      color: #262627;
+      background-color: #fafafa;
     }
 
     nav {
-      background: #ff5353;
+      background-color: #ffffff;
+      color: #4c4c4c;
+      border-bottom: 1px solid #ededed;
       padding: 20px 10px;
     }
 
@@ -24,16 +30,23 @@
     nav li {
       list-style-type: none;
       display: inline-block;
-      margin: 0 10px 0 0;
     }
 
     nav a {
-      color: #fff;
       font-size: 18px;
-      background: rgba(255, 255, 255, 0.2);
+      background: #F0F0F0;
       text-decoration: none;
       padding: 10px;
       display: block;
+    }
+
+    nav a:visited {
+      color: inherit;
+    }
+
+    nav a:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
     }
 
     main,
@@ -42,6 +55,24 @@
       margin: 30px auto;
       padding: 0 10px;
       color: #333;
+    }
+
+    .btn {
+      color: #fff;
+      font-size: 15px;
+      background: var(--accent);
+      display: inline-block;
+      border: none;
+      padding: 3px 12px;
+      min-width: 120px;
+      padding: 10px;
+      margin: 10px 0;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      cursor: pointer;
+      background-color: #ef6474;
     }
   </style>
 </head>
@@ -53,9 +84,10 @@
         <li>
           <a href="/auth/logout">Log out</a>
         </li>
-        <%} else { %>
+
+        <% } else { %>
           <li>
-            <a href="/auth/login">Login</a>
+            <a href="/">Home</a>
           </li>
           <% } %>
     </ul>
@@ -65,7 +97,9 @@
   </header>
   <main>
     <p>A super simple app to test OAuth login flows and scopes</p>
-    <a href="/auth/login">Select scopes and login through Typeform!</a>
+    <% if (!user) { %>
+      <a class="btn login" href="/auth/login">Select scopes and login through Typeform!</a>
+      <% } %>
   </main>
 </body>
 
