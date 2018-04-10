@@ -1,21 +1,32 @@
 window.onload = () => {
-  let allChecks = Array.from(document.getElementsByTagName('input'));
-  let readChecks = allChecks.filter(checkbox => checkbox.name.includes('read'));
-  let writeChecks = allChecks.filter(checkbox =>
-    checkbox.name.includes('write')
-  );
+  const allCheckboxes = Array.from(document.getElementsByTagName('input'));
+  let categorizedCheckboxes = {};
 
-  document.getElementById('all').addEventListener('click', e => {
-    allChecks.forEach(checkbox => (checkbox.checked = true));
-  });
+  ['read', 'write', 'all'].forEach(right => {
+    //categorize checkboxes
+    if (right !== 'all') {
+      categorizedCheckboxes[right] = allCheckboxes.filter(checkbox =>
+        checkbox.name.includes(right)
+      );
+    }
 
-  document.getElementById('read').addEventListener('click', e => {
-    readChecks.forEach(checkbox => (checkbox.checked = true));
-    writeChecks.forEach(checkbox => (checkbox.checked = false));
-  });
+    //add event listeners to group buttons
+    document.getElementById(right).addEventListener('click', e => {
+      if (right === 'all') {
+        return allCheckboxes.forEach(checkbox => (checkbox.checked = true));
+      }
 
-  document.getElementById('write').addEventListener('click', e => {
-    writeChecks.forEach(checkbox => (checkbox.checked = true));
-    readChecks.forEach(checkbox => (checkbox.checked = false));
+      categorizedCheckboxes[right].forEach(
+        checkbox => (checkbox.checked = true)
+      );
+
+      const otherRight = Object.keys(categorizedCheckboxes).filter(
+        key => key !== right
+      );
+
+      categorizedCheckboxes[otherRight].forEach(
+        checkbox => (checkbox.checked = false)
+      );
+    });
   });
 };
