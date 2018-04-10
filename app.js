@@ -5,7 +5,6 @@ const cookieSession = require('cookie-session');
 
 // eslint-disable-next-line no-unused-vars
 const passportSetup = require('./config/passport-setup');
-const keys = require('./config/keys');
 
 const authRoutes = require('./routes/auth-routes');
 const dashboardRoutes = require('./routes/dashboard-routes');
@@ -18,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [keys.session.cookieKey || process.env.COOKIE_KEY]
+    keys: ['aCookieKey']
   })
 );
 

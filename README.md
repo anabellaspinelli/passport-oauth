@@ -1,15 +1,3 @@
 # passport-oauth
 
-You'll need a keys.js in config with your app keys, and this format:
-
-```
-module.exports = {
-  typeform: {
-    clientID: <your Typeform client ID>,
-    clientSecret: <your Typeform client Secret>
-  },
-  session: {
-    cookieKey: 'some string?'
-  }
-};
-```
+To use this you'll need to copy the `.env.dist` file to an `.env` file and add your own CLIENT_ID and CLIENT_SECRET variables and then run `export $(cat .env)` to have them as env variables.
