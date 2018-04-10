@@ -163,12 +163,13 @@
     <div id="dashboard">
       <h2>Now try them out!</h2>
       <section id="buttons">
-        <% typeformScopes.forEach(function(scope) { %>
+        <% Object.keys(typeformScopes).forEach(function(scopeName) { %>
           <div class="button-group">
-            <button class="<%= scope %>" value="GET">Get
-              <%= scope %>!</button>
-            <button class="<%= scope %>" value="POST">Post
-              <%= scope.substring(scope.length - 1, 0) %>!</button>
+            <% typeformScopes[scopeName].forEach(function(scopeRight) { %>
+              <button class="<%= scopeName %><% scopeRight.charAt(0).toUpperCase() %>" value="<%= scopeRight === 'read' ? 'GET' : 'POST' %>">
+                <%= scopeRight === 'read' ? 'GET' : 'POST' %>
+                  <%= scopeRight === 'write' ? scopeName.substring(scopeName.length - 1, 0) : scopeName %>!</button>
+              <% }); %>
           </div>
           <% }); %>
       </section>

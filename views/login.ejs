@@ -91,16 +91,17 @@
     <button id="read" class="btn group-scopes">Read everything</button>
     <button id="write" class="btn group-scopes">Write everything</button>
     <form action="/auth/typeform" method="get">
-      <% scopes.forEach(function(scope) { %>
+      <% Object.keys(scopes).forEach(function(scopeName) { %>
         <div>
           <h2>
-            <%= scope %>
+            <%= scopeName %>
           </h2>
-          <input type="checkbox" name="<%= scope %>:read"></input>
-          <label for="<%= scope %>:read">read</label>
-
-          <input type="checkbox" name="<%= scope %>:write"></input>
-          <label for="<%= scope %>:write">write</label>
+          <% scopes[scopeName].forEach(function(scopeRight) { %>
+            <input type="checkbox" name="<%= scopeName %>:<%= scopeRight%>"></input>
+            <label for="<%= scopeName %>:<%= scopeRight%>">
+              <%= scopeRight%>
+            </label>
+            <% }); %>
         </div>
         <% }); %>
           <button class="btn" type="submit">Login with Typeform</a>
