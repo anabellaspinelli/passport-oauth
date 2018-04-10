@@ -27,7 +27,7 @@ router.get('/typeform', (req, res) => {
   })(req, res);
 });
 
-// callback route for google to redirect to
+// callback route for typeform to redirect to
 router.get(
   '/typeform/redirect',
   passport.authenticate('oauth2'),
