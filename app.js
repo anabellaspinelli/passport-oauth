@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [keys.session.cookieKey]
+    keys: [keys.session.cookieKey || process.env.COOKIE_KEY]
   })
 );
 

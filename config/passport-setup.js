@@ -11,8 +11,8 @@ passport.use(
       //options for the typeform strategy
       authorizationURL: 'https://api.typeform.com/oauth/authorize',
       tokenURL: 'https://api.typeform.com/oauth/token',
-      clientID: keys.typeform.clientID,
-      clientSecret: keys.typeform.clientSecret,
+      clientID: keys.typeform.clientID || process.env.CLIENT_ID,
+      clientSecret: keys.typeform.clientSecret || process.env.CLIENT_SECRET,
       callbackURL: '/auth/typeform/redirect'
     },
     (accessToken, refreshToken, profile, cb) => {
