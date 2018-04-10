@@ -35,7 +35,9 @@ app.get('/', (req, res) => {
   res.render('home', { user: req.user });
 });
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log('app listening on port 3000');
+  console.log(`app listening on port ${port}`);
 });
