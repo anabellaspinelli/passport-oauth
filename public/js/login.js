@@ -1,32 +1,15 @@
 window.onload = () => {
-  const allCheckboxes = Array.from(document.getElementsByTagName('input'));
-  let categorizedCheckboxes = {};
+  const checkboxes = Array.from(document.getElementsByTagName('input'));
 
-  ['read', 'write', 'all'].forEach(right => {
-    //categorize checkboxes
-    if (right !== 'all') {
-      categorizedCheckboxes[right] = allCheckboxes.filter(checkbox =>
-        checkbox.name.includes(right)
-      );
-    }
-
-    //add event listeners to group buttons
+  ['read', 'write'].forEach(right => {
     document.getElementById(right).addEventListener('click', e => {
-      if (right === 'all') {
-        return allCheckboxes.forEach(checkbox => (checkbox.checked = true));
-      }
-
-      categorizedCheckboxes[right].forEach(
-        checkbox => (checkbox.checked = true)
-      );
-
-      const otherRight = Object.keys(categorizedCheckboxes).filter(
-        key => key !== right
-      );
-
-      categorizedCheckboxes[otherRight].forEach(
-        checkbox => (checkbox.checked = false)
-      );
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = checkbox.name.includes(right);
+      });
     });
+  });
+
+  document.getElementById('all').addEventListener('click', e => {
+    checkboxes.forEach(checkbox => (checkbox.checked = true));
   });
 };
