@@ -10,7 +10,7 @@
       --main: #4FB0AE;
       --accent: #d8495a;
       --soft: #e8e8e8;
-      --read: #1F7A8C;
+      --write: #1F7A8C;
 
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       margin: 0;
@@ -89,6 +89,19 @@
       background-color: var(--main);
     }
 
+    #clear {
+      background: var(--soft);
+      color: #484848;
+    }
+
+    #write {
+      background: var(--write);
+    }
+
+    #all {
+      background: #484848;
+    }
+
     form>div {
       margin-bottom: 20px;
     }
@@ -111,9 +124,10 @@
     <h1>Pick the scopes you want and log in</h1>
   </header>
   <main>
-    <button id="all" class="btn group-scopes">All the scopes!</button>
     <button id="read" class="btn group-scopes">Read everything</button>
     <button id="write" class="btn group-scopes">Write everything</button>
+    <button id="all" class="btn group-scopes">All the scopes!</button>
+    <button id="clear" class="btn group-scopes">Clear the board!</button>
     <form action="/auth/typeform" method="get">
       <% Object.keys(scopes).forEach(function(scopeName) { %>
         <div class="squaredFour">

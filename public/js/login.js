@@ -1,15 +1,23 @@
 window.onload = () => {
+  setupGroupScopesButton(document.getElementById('read'));
+  setupGroupScopesButton(document.getElementById('write'));
+  setupGroupScopesButton(document.getElementById('all'));
+  setupGroupScopesButton(document.getElementById('clear'));
+};
+
+const setupGroupScopesButton = (() => {
   const checkboxes = Array.from(document.getElementsByTagName('input'));
 
-  ['read', 'write'].forEach(right => {
-    document.getElementById(right).addEventListener('click', e => {
+  function setupGroupScopesButton(button) {
+    button.addEventListener('click', e => {
       checkboxes.forEach(checkbox => {
-        checkbox.checked = checkbox.name.includes(right);
+        if (button.id === 'all') return (checkbox.checked = true);
+        if (button.id === 'clear') return (checkbox.checked = false);
+
+        return (checkbox.checked = checkbox.name.includes(button.id));
       });
     });
-  });
+  }
 
-  document.getElementById('all').addEventListener('click', e => {
-    checkboxes.forEach(checkbox => (checkbox.checked = true));
-  });
-};
+  return setupGroupScopesButton;
+})();
