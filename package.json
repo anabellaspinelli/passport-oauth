@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,7 @@
     "nodemon": "^1.17.3",
     "passport": "^0.4.0",
     "passport-oauth2": "^1.4.0",
-    "superagent": "^3.8.2"
+    "passport-typeform": "/Users/anabellaspinelli/code/passport-typeform"
   },
   "devDependencies": {
     "eslint-config-standard": "^11.0.0",

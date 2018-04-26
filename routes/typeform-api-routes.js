@@ -96,13 +96,12 @@ router.post('/images', (req, res) => {
     'base64',
     (err, data) => {
       if (err) throw err;
-      console.log('readFile');
       request
         .post(`${TF_API_BASE}/images`)
         .set({ Authorization: `Bearer ${req.user.access_token}` })
         .send({
           image: data,
-          file_name: 'ana.png'
+          file_name: 'beach.jpeg'
         })
         .then(postImageResponse => {
           console.log('tf response', postImageResponse.body);
