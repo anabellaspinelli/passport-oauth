@@ -38,6 +38,7 @@
       text-decoration: none;
       padding: 10px;
       display: block;
+      color: #4c4c4c;
     }
 
     nav a:visited {
@@ -84,12 +85,15 @@
         <li>
           <a href="/auth/logout">Log out</a>
         </li>
-
-        <% } else { %>
+        <%} else { %>
           <li>
-            <a href="/">Home</a>
+            <a href="/auth/login">Login</a>
           </li>
           <% } %>
+
+            <li>
+              <a href="/disclaimer">Disclaimer</a>
+            </li>
     </ul>
   </nav>
   <header>

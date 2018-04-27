@@ -36,6 +36,10 @@ app.get('/', (req, res) => {
   res.render('home', { user: req.user })
 })
 
+app.get('/disclaimer', (req, res) => {
+  res.render('disclaimer', { user: req.user })
+})
+
 const port = process.env.PORT || 3000
 
 app.listen(port, () => {
