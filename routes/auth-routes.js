@@ -22,7 +22,6 @@ router.get('/typeform', (req, res) => {
     scope => req.query[scope] == 'on'
   )
 
-  // passport.authenticate('oauth2', {
   passport.authenticate('typeform', {
     scope: selectedScopes
   })(req, res)
@@ -31,7 +30,6 @@ router.get('/typeform', (req, res) => {
 // callback route for typeform to redirect to
 router.get(
   '/typeform/redirect',
-  // passport.authenticate('oauth2'),
   passport.authenticate('typeform'),
   (req, res) => {
     // this fires AFTER the passport callback function
