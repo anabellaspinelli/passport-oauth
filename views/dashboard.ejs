@@ -174,7 +174,7 @@
           <div class="button-group">
             <% typeformScopes[scopeName].forEach(function(scopeRight) { %>
               <button class="<%= scopeName %><% scopeRight.charAt(0).toUpperCase() %>" value="<%= scopeRight === 'read' ? 'GET' : 'POST' %>">
-                <%= scopeRight === 'read' ? 'GET' : 'POST' %>
+                <%= scopeRight === 'read' ? 'READ' : 'WRITE' %>
                   <%= scopeRight === 'write' ? scopeName.substring(scopeName.length - 1, 0) : scopeName %>!</button>
               <% }); %>
           </div>
