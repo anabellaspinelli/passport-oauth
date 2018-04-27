@@ -10,7 +10,7 @@ window.onload = () => {
 
         if (!userAlerted && button.value.includes('POST')) {
           window.alert(
-            'This will actually WRITE stuff into your account, handle with care. \n\nYou have been warned! ;)'
+            'This will actually WRITE stuff into your account, handle with care. \n\nYou have been alerted... I mean warned! ;)'
           )
           userAlerted = true
         }

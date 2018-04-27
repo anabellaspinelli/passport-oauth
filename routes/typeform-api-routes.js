@@ -6,30 +6,51 @@ const path = require('path')
 const TF_API_BASE = 'https://api.typeform.com'
 
 router.get('/forms', (req, res) => {
-  getFromTypeform('forms', req).then(response =>
-    res.send({
-      typeformResponseBody: response.body,
-      typeformResponseStatus: res.status
-    })
-  )
+  getFromTypeform('forms', req)
+    .then(response =>
+      res.send({
+        typeformResponseBody: response.body,
+        typeformResponseStatus: res.status
+      })
+    )
+    .catch(err =>
+      res.send({
+        typeformResponseBody: err.response.text,
+        typeformResponseStatus: err.status
+      })
+    )
 })
 
 router.get('/images', (req, res) => {
-  getFromTypeform('images', req).then(response =>
-    res.send({
-      typeformResponseBody: response.body,
-      typeformResponseStatus: res.status
-    })
-  )
+  getFromTypeform('images', req)
+    .then(response =>
+      res.send({
+        typeformResponseBody: response.body,
+        typeformResponseStatus: res.status
+      })
+    )
+    .catch(err =>
+      res.send({
+        typeformResponseBody: err.response.text,
+        typeformResponseStatus: err.status
+      })
+    )
 })
 
 router.get('/themes', (req, res) => {
-  getFromTypeform('themes', req, { visibility: 'private' }).then(response =>
-    res.send({
-      typeformResponseBody: response.body,
-      typeformResponseStatus: res.status
-    })
-  )
+  getFromTypeform('themes', req, { visibility: 'private' })
+    .then(response =>
+      res.send({
+        typeformResponseBody: response.body,
+        typeformResponseStatus: res.status
+      })
+    )
+    .catch(err =>
+      res.send({
+        typeformResponseBody: err.response.text,
+        typeformResponseStatus: err.status
+      })
+    )
 })
 
 router.get('/responses', (req, res) => {
@@ -46,8 +67,12 @@ router.get('/responses', (req, res) => {
         typeformResponseStatus: responsesResponse.status
       })
     })
-    // eslint-disable-next-line no-console
-    .catch(err => console.error(err))
+    .catch(err =>
+      res.send({
+        typeformResponseBody: err.response.text,
+        typeformResponseStatus: err.status
+      })
+    )
 })
 
 router.get('/webhooks', (req, res) => {
@@ -76,8 +101,12 @@ router.get('/webhooks', (req, res) => {
         typeformResponseStatus: whGetResponse.status
       })
     })
-    // eslint-disable-next-line no-console
-    .catch(err => console.error(err))
+    .catch(err =>
+      res.send({
+        typeformResponseBody: err.response.text,
+        typeformResponseStatus: err.status
+      })
+    )
 })
 
 router.post('/webhooks', (req, res) => {
@@ -95,12 +124,12 @@ router.post('/webhooks', (req, res) => {
         typeformResponseStatus: response.status
       })
     })
-    .catch(err => {
+    .catch(err =>
       res.send({
-        typeformResponseBody: err,
+        typeformResponseBody: err.response.text,
         typeformResponseStatus: err.status
       })
-    })
+    )
 })
 
 router.post('/forms', (req, res) => {
@@ -113,7 +142,12 @@ router.post('/forms', (req, res) => {
         typeformResponseStatus: postFormResponse.status
       })
     })
-    .catch(err => console.log(err))
+    .catch(err =>
+      res.send({
+        typeformResponseBody: err.response.text,
+        typeformResponseStatus: err.status
+      })
+    )
 })
 
 router.post('/themes', (req, res) => {
@@ -133,7 +167,12 @@ router.post('/themes', (req, res) => {
         typeformResponseStatus: postFormResponse.status
       })
     })
-    .catch(err => console.log(err))
+    .catch(err =>
+      res.send({
+        typeformResponseBody: err.response.text,
+        typeformResponseStatus: err.status
+      })
+    )
 })
 
 router.post('/images', (req, res) => {
@@ -156,7 +195,12 @@ router.post('/images', (req, res) => {
             typeformResponseStatus: postImageResponse.status
           })
         })
-        .catch(err => console.log(err))
+        .catch(err =>
+          res.send({
+            typeformResponseBody: err.response.text,
+            typeformResponseStatus: err.status
+          })
+        )
     }
   )
 })
