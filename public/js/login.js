@@ -35,8 +35,11 @@ const setupWebhooksDependencies = checkbox => {
       checkbox.name.includes(dependency)
     )
 
-    SCOPE_DEPENDENCIES[currentDependency].forEach(
-      scope => (document.querySelector([`[name="${scope}"]`]).checked = true)
-    )
+    if (checkbox.checked) {
+      // don't change other checkboxes if you're just disabling one
+      SCOPE_DEPENDENCIES[currentDependency].forEach(
+        scope => (document.querySelector([`[name="${scope}"]`]).checked = true)
+      )
+    }
   })
 }

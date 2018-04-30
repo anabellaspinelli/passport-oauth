@@ -189,7 +189,6 @@ router.post('/images', (req, res) => {
           file_name: `Typeform_OAuth_${Date.now()}.jpeg`
         })
         .then(postImageResponse => {
-          console.log('tf response', postImageResponse.body)
           res.send({
             typeformResponseBody: postImageResponse.body,
             typeformResponseStatus: postImageResponse.status
