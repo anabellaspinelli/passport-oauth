@@ -17,7 +17,7 @@ passport.use(
     },
     (accessToken, refreshToken, profile, cb) => {
       // passport callback function fires after exchanging code for profile info
-      cb(null, { access_token: accessToken })
+      cb(null, { access_token: accessToken, profile })
     }
   )
 )
