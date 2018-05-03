@@ -5,6 +5,7 @@ window.onload = () => {
   setupGroupScopesButton(document.getElementById('clear'))
   setupWebhooksDependencies(document.querySelector('[name="webhooks:read"]'))
   setupWebhooksDependencies(document.querySelector('[name="webhooks:write"]'))
+  enableCheck(document.querySelector('[name="accounts:read"]'))
 }
 
 const setupGroupScopesButton = (() => {
@@ -16,8 +17,9 @@ const setupGroupScopesButton = (() => {
         if (button.id === 'all') return (checkbox.checked = true)
         if (button.id === 'clear') return (checkbox.checked = false)
 
-        return (checkbox.checked = checkbox.name.includes(button.id))
+        checkbox.checked = checkbox.name.includes(button.id)
       })
+      enableCheck(document.querySelector('[name="accounts:read"]'))
     })
   }
 
@@ -42,4 +44,8 @@ const setupWebhooksDependencies = checkbox => {
       )
     }
   })
+}
+
+const enableCheck = checkbox => {
+  checkbox.checked = true
 }
