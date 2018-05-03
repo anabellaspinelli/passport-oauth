@@ -5,6 +5,24 @@ const path = require('path')
 
 const TF_API_BASE = 'https://api.typeform.com'
 
+router.get('/accounts', (req, res) => {
+  return request
+    .get(`${TF_API_BASE}/me`)
+    .set({ Authorization: `Bearer ${req.user.access_token}` })
+    .then(response =>
+      res.send({
+        typeformResponseBody: response.body,
+        typeformResponseStatus: res.status
+      })
+    )
+    .catch(err =>
+      res.send({
+        typeformResponseBody: err.response.text,
+        typeformResponseStatus: err.status
+      })
+    )
+})
+
 router.get('/forms', (req, res) => {
   getFromTypeform('forms', req)
     .then(response =>
