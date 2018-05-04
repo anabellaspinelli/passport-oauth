@@ -12,8 +12,7 @@ passport.use(
       tokenURL: 'https://api.typeform.com/oauth/token',
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: process.env.REDIRECT_URL || '/auth/typeform/redirect',
-      scopeSeparator: ' '
+      callbackURL: process.env.REDIRECT_URL || '/auth/typeform/redirect'
     },
     (accessToken, refreshToken, profile, cb) => {
       // passport callback function fires after exchanging code for profile info
