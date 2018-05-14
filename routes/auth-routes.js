@@ -1,7 +1,9 @@
 const router = require('express').Router()
 const passport = require('passport')
-const scopes = require('../config/scopes')
+const TypeformStrategy = require('passport-typeform')
 const querystring = require('querystring')
+
+const scopes = require('../config/scopes')
 
 let selectedScopes
 
@@ -22,9 +24,25 @@ router.get('/typeform', (req, res) => {
     scope => req.query[scope] == 'on'
   )
 
-  passport.authenticate('typeform', {
-    scope: selectedScopes
-  })(req, res)
+  passport.use(
+    new TypeformStrategy(
+      {
+        // options for the typeform strategy
+        authorizationURL: 'https://api.typeform.com/oauth/authorize',
+        tokenURL: 'https://api.typeform.com/oauth/token',
+        clientID: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+        callbackURL: process.env.REDIRECT_URL || '/auth/typeform/redirect',
+        scope: selectedScopes
+      },
+      (accessToken, refreshToken, profile, cb) => {
+        // passport callback function fires after exchanging code for profile info
+        cb(null, { access_token: accessToken, profile })
+      }
+    )
+  )
+
+  passport.authenticate('typeform')(req, res)
 })
 
 // callback route for typeform to redirect to
@@ -34,7 +52,7 @@ router.get(
   (req, res) => {
     // this fires AFTER the passport callback function
     // the user obj comes in the request as per passport.serialize/deserialize
-    const query = querystring.stringify({ selectedScopes: selectedScopes })
+    const query = querystring.stringify({ selectedScopes })
     res.redirect('/dashboard?' + query)
   }
 )
