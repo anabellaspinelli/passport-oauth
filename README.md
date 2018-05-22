@@ -12,7 +12,7 @@ You'll get to choose what scopes (permissions) you want to use to login with Typ
 1. Run `yarn install` (or `npm install`) inside the repo directory
 1. Copy the `.env.dist` file to a `.env` file  
 1. Add the `CLIENT_ID` and `CLIENT_SECRET` you got from Typeform on step 1
-    * You can also set up a `REDIRECT_URI` here, but it's optional and will default to the one in step 1
+    * You can also set up a `REDIRECT_URI` here, but it's optional and will default to the one in step 1
 1. Run `export $(cat .env)` to save those values as enviromental variables
 1. Run `yarn start` (or `npm start`) to start the app
 1. Go to `http://localhost:3000` to begin using it
