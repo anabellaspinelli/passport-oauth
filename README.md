@@ -13,6 +13,6 @@ You'll get to choose what scopes (permissions) you want to use to login with Typ
 1. Run `yarn start` (or `npm start`) to start the app
 1. Go to `http://localhost:3000` to begin using it
 
-Alternatively, you can set a PORT env variable which will be picked up by the app.
+Alternatively, you can set a `PORT` env variable which will be picked up by the app.
 
-This project uses PassportJS and a custom passport-typeform strategy to connect via OAuth.
+This project uses PassportJS and a custom [passport-typeform](https://www.npmjs.com/package/passport-typeform) strategy to connect via OAuth.
