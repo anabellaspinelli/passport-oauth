@@ -28,8 +28,6 @@ router.get('/typeform', (req, res) => {
     new TypeformStrategy(
       {
         // options for the typeform strategy
-        authorizationURL: 'https://api.typeform.com/oauth/authorize',
-        tokenURL: 'https://api.typeform.com/oauth/token',
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         callbackURL: process.env.REDIRECT_URL || '/auth/typeform/redirect',
@@ -48,7 +46,13 @@ router.get('/typeform', (req, res) => {
 // callback route for typeform to redirect to
 router.get(
   '/typeform/redirect',
-  passport.authenticate('typeform'),
+  (req, res, next) => {
+    if (!req.query.code) {
+      return res.redirect('/auth/login')
+    }
+
+    passport.authenticate('typeform')(req, res, next)
+  },
   (req, res) => {
     // this fires AFTER the passport callback function
     // the user obj comes in the request as per passport.serialize/deserialize
