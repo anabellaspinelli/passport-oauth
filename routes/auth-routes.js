@@ -28,6 +28,8 @@ router.get('/typeform', (req, res) => {
     new TypeformStrategy(
       {
         // options for the typeform strategy
+        authorizationURL: process.env.AUTHORIZATION_URL,
+        tokenURL: process.env.TOKEN_URL,
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         callbackURL: process.env.REDIRECT_URL || '/auth/typeform/redirect',
