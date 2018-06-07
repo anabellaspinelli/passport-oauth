@@ -3,7 +3,7 @@ const passport = require('passport')
 const TypeformStrategy = require('passport-typeform')
 const querystring = require('querystring')
 
-const scopes = require('../config/scopes')
+const scopes = require('../../config/scopes')
 
 let selectedScopes
 

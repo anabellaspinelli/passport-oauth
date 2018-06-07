@@ -6,15 +6,16 @@ const cookieSession = require('cookie-session')
 const dotenv = require('dotenv')
 
 // eslint-disable-next-line no-unused-vars
-const passportSetup = require('./config/passport-setup')
+const passportSetup = require('../config/passport-setup')
 
 const authRoutes = require('./routes/auth-routes')
 const dashboardRoutes = require('./routes/dashboard-routes')
 const typeformRoutes = require('./routes/typeform-api-routes')
 
 const app = express()
-require('dotenv').config() // export .env variables
+dotenv.config() // export .env variables
 app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, '/views'))
 
 app.use(
   cookieSession({
@@ -27,7 +28,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, '../public')))
 
 // Routes
 app.use('/auth', authRoutes)

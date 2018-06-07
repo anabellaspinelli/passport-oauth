@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const typeformScopes = require('../config/scopes')
+const typeformScopes = require('../../config/scopes')
 
 const authCheck = (req, res, next) => {
   if (!req.isAuthenticated) {

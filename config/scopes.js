@@ -1,4 +1,4 @@
-const scopes = {
+module.exports = {
   accounts: ['read'],
   forms: ['read', 'write'],
   images: ['read', 'write'],
@@ -6,5 +6,3 @@ const scopes = {
   responses: ['read'],
   webhooks: ['read', 'write']
 }
-
-module.exports = scopes
